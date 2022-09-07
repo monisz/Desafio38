@@ -1,6 +1,5 @@
 const router = express.Router();
 const isAdmin = require('./middlewares/isAdmin');
-const { Container, colProduct } = require('../../src/containers/containerMongoDb');
 
 logger.info(`admin en routerProducts ${admin}`);
 

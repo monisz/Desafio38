@@ -99,7 +99,6 @@ const colProduct = new Products();
 const cartsSchema = new mongoose.Schema({
     timestamp: {type: Date, require: true},
     id: {type: Number, require: true},
-    /* username: {type: String, require: true}, */
     products : []
 });
 const Cart = mongoose.model("cart", cartsSchema);
