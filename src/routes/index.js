@@ -1,8 +1,8 @@
 const express = require('express');
 
 const routerUsers = require()
-const routerProducts = require('../daos/productsDaoMongoDb');
-const routerCart = require('../daos/cartDaoMongoDb');
+const routerProducts = require('../../modules/products/routerProducts');
+const routerCart = require('../../modules/cart/routerCart');
 const routerMessages = require('../daos/messagesDao_firebase');
 const routerRandom = require('../daos/numbersRandom');
 
