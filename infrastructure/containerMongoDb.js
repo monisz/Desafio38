@@ -110,5 +110,21 @@ class Carts extends Container {
 };
 const colCart = new Carts();
 
-module.exports = { Container, colProduct, colCart };
+const UsersSchema = new mongoose.Schema({
+    username: {type: String, require: true},
+    name: {type: String, require: true},
+    address: {type: String, require: true},
+    age: {type: Number, require: true},
+    phone: {type: Number, require: true}
+});
+
+const User = mongoose.model("user", UsersSchema);
+class Users extends Container {
+    constructor() {
+        super(User);
+    }
+};
+const colUser = new Users();
+
+module.exports = { Container, colProduct, colCart, colUser };
 

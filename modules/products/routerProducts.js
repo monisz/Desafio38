@@ -1,6 +1,9 @@
-const router = express.Router();
+const router = require('express').Router();
 const isAdmin = require('./middlewares/isAdmin');
+const logger = require('../../utils/loggers/winston');
+const { getAllProducts, getProductById, addProduct, updateProduct, deleteProductById } = require('./controllersProducts');
 
+const admin = process.env.ADMIN;
 logger.info(`admin en routerProducts ${admin}`);
 
 //Vista de todos los productos

@@ -1,5 +1,6 @@
 const { getCart, updateCart, deleteCart } = require(`./serviceCart`);
 const getProduct = require('../products/serviceProducts');
+const sendMail = require('../../utils/mailer');
 
 //Para listar todos los productos de un carrito según su id
 const getCartById = (req, res) => {

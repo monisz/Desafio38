@@ -19,34 +19,3 @@ const deleteCart = async (id) => {
 };
 
 module.exports = { getCart, updateCart, deleteCart};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = {
-    getListProducts
-}

@@ -2,7 +2,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const { MongoClient } = require('mongodb');
-const logger = require('./utils/loggers/winston');
+const logger = require('../../../utils/loggers/winston');
 const { MONGO_ATLAS_CONNECTION } = process.env;
 
 const connectMongo = ( async () => {
@@ -47,7 +47,9 @@ const connectMongo = ( async () => {
     }));
 
     passport.use('login', new LocalStrategy( async (username, password, callback) => {
+        console.log("en passport login")
         const user = await findUser(username);
+        console.log("user en passport", user)
         if (user.length === 0 || !bcrypt.compareSync(password, user[0].password)) return callback(null, false, { message: 'Usuario no registrado o password incorrecto'});
         callback(null, user);
     }));

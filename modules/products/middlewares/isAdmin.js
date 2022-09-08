@@ -1,3 +1,4 @@
+const logger = require('../../../utils/loggers/winston');
 //Variable para manejo de autorización
 const admin = process.env.ADMIN;
 

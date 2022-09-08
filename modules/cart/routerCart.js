@@ -1,4 +1,5 @@
-const router = express.Router();
+const router = require('express').Router();
+const { getCartById, addProductToCart, deleteCartById, deleteProductFromCart, checkout } = require('./controllersCart');
 
 //Para listar todos los productos de un carrito según su id
 router.get('/:id/productos', getCartById);
