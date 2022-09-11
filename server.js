@@ -11,11 +11,9 @@ const numCPUs = require('os').cpus().length;
 const cluster = require('cluster');
 const compression = require('compression');
 const logger = require('./utils/loggers/winston');
-/* const multer = require('multer'); */
-/* const sendMail = require('./utils/mailer'); */
 
-const apiRoutes = require('./src/routes');
-const { Container, colProduct, colCart } = require('./src/containers/containerMongoDb');
+const apiRoutes = require('./src/routes/index');
+const { Container, colProduct } = require('./infrastructure/containerMongoDb');
 const colMessages = require('./src/containers/messagesContainer_firebase');
 
 const app = express();
@@ -62,72 +60,6 @@ app.use((req, res, next) => {
     next();
 });
 
-/* app.get('/register', (req, res) => { */
-/*     res.render('register'); */
-/* }); */
-
-/* app.post('/register', uploader.single('avatar'), passport.authenticate('register', {failureRedirect: '/failregister', failureMessage: true}), (req, res) => {*/ 
-/*     const registerSuccess = 'Registrado exitosamente. Ir a Login para ingresar'; */
-/*     sendMail(req.body); */
-/*     res.render('register', {registerSuccess}); */
-/* }); */
-
-/* app.get('/failregister', (req, res) => { */
-/*     res.render('failregister'); */
-/* }); */
-
-/* app.get('/login', (req, res) => { */
-/*     if (!req.session.user)  */
-/*         res.render('login'); */
-/*     else { */
-/*         const user = req.session.user; */
-/*         res.render('home',  {user}); */
-/*     } */
-/* }); */
-
-/* app.post('/login', passport.authenticate('login', {failureRedirect: '/faillogin', failureMessage: true}), (req, res) => { */
-/*     const user = { */
-/*         username: req.user[0].username, */
-/*         name: req.user[0].name, */
-/*         address: req.user[0].address, */
-/*         age: req.user[0].age, */
-/*         phone: req.user[0].phone */
-/*     } */
-/*     req.session.user = user; */
-/*     const admin = process.env.ADMIN; */
-/*     const createCart = (async () => { */
-/*         const newCart = { */
-/*             timestamp : Date.now(), */
-/*             products: [] */
-/*         }; */
-/*         const idCart = await colCart.save(newCart); */
-/*         logger.info(`carrito agregado id: ${idCart}`); */
-/*         req.session.cart = idCart; */
-/*         res.render('home',  {user, admin, idCart}); */
-/*     }) (); */
-/* }); */
-
-/* app.get('/faillogin', (req, res) => { */
-/*     res.render('faillogin'); */
-/* }); */
-
-const isLogin = (req, res, next) => {
-    console.log("en islogin")
-    if (!req.session.user) { 
-        res.render('login');
-    } else next();
-};
-
-app.use('/', isLogin, apiRoutes);
-
-/* app.post('/logout', isLogin, async (req, res) => { */
-/*     const username = req.session.user.username; */
-/*     req.session.destroy((err) => { */
-/*         logger.error(err); */
-/*         res.render('logout', {username}) */
-/*     }); */
-/* }); */
-
 const args = process.argv.slice(2);
 const argsparse = minimist(args, {
     default: {
@@ -142,7 +74,6 @@ const argsparse = minimist(args, {
 
 const port = process.env.PORT || argsparse.port;
 logger.info(`admin en server ${process.env.ADMIN}`)
-
 
 //Ruta info
 app.get('/info', (req, res) => {
@@ -165,13 +96,7 @@ app.get('/info', (req, res) => {
     res.render('info', {info});
 });
 
-
-//Ruta para test con Faker
-app.get('/api/productos-test', isLogin, async (req, res) => {
-    const mocks = await tableProducts.generateMock();
-    logger.info(`mocks ${mocks}`);
-    res.render('main-faker', {mocks})
-});
+app.use('/', apiRoutes);
 
 // Para cualquier ruta no implementada
 app.use((req, res) => {

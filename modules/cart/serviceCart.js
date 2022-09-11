@@ -1,4 +1,16 @@
-const { Container, colCart } = require('../../src/containers/containerMongoDb');
+const { Container, colCart } = require('../../infrastructure/containerMongoDb');
+const sendMail = require('../../utils/mailer');
+const sendWhatsapp = require('../../utils/whatsapp');
+
+//Para crear el carrtio carrito luego del logueo
+const createCart = async () => {
+    const newCart = {
+        timestamp : Date.now(),
+        products: []
+    };
+    return await colCart.save(newCart);
+};
+
 
 //Para obtener un carrito según su id
 const getCart = async (id) => {
@@ -9,7 +21,7 @@ const getCart = async (id) => {
 //Para actualizar un carrito por id
 const updateCart = async (id, newData) => {
     const updatedCart = await colCart.replaceById(id, newData);
-    return updatedProduct;
+    return updatedCart;
 };
 
 //Para borrar un carrito según el id
@@ -18,4 +30,16 @@ const deleteCart = async (id) => {
     return result;
 };
 
-module.exports = { getCart, updateCart, deleteCart};
+//Envío de los avisos de compra por mail y whatsapp
+const sendPurchaseNotices = (user, productsInCart) => {
+    sendWhatsapp(user);
+    const dataCheckout = {
+        user: user,
+        products: productsInCart   
+    }
+    sendMail(dataCheckout);
+    return dataCheckout;
+};
+
+
+module.exports = { createCart, getCart, updateCart, deleteCart, sendPurchaseNotices};

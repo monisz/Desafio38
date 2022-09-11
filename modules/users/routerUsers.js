@@ -2,6 +2,7 @@ const router = require('express').Router();
 const passport = require('./utils/passport');
 const multer = require('multer');
 const { register, registerUser, failRegister, login, loginUser, faillogin, logout } = require('./controllersUsers');
+const { isLogin } = require('./utils/isLogin');
 
 const storage = multer.diskStorage({
     destination: './public/avatars',
@@ -21,11 +22,13 @@ router.get('/failregister', failRegister);
 
 router.get('/login', login);
 
-router.post('/login', passport.authenticate('login', {failureRedirect: '/faillogin', failureMessage: true}), loginUser);
+router.post('/login', uploader.single('avatar'), passport.authenticate('login', {failureRedirect: '/faillogin', failureMessage: true}), loginUser);
 
 router.get('/faillogin', faillogin);
 
-router.post('/logout', /* isLogin, */ logout);
+router.use('/', isLogin);
+
+router.post('/logout', logout);
 
 
 module.exports = router;

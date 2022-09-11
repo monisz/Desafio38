@@ -68,52 +68,52 @@ const messagesSchema = new normalizr.schema.Entity('messages', {
 
 
 //Productos
-const sendProduct = () => {
-    const title = document.getElementById("title").value;
-    const description = document.getElementById("description").value;
-    const code = document.getElementById("code").value;
-    const thumbnail = document.getElementById("thumbnail").value;
-    const price = document.getElementById("price").value;
-    const stock = document.getElementById("stock").value;
-    const timestamp  = Date.now();
-    const product = { title, description, code, thumbnail, price, stock, timestamp };
-    socket.emit("newProduct", product);
-    return false;
-};
-
-const showProduct = (product) => {
-    const { code, title, price, thumbnail } = product;
-    return `
-        <tr>
-            <td>${code}</td>
-            <td>${title}</td>
-            <td>${price}</td>
-            <td><img src="${thumbnail}" height="50rem"></td>
-        </tr>
-    `;
-};
-
-const addProduct = (products) => {
-    if (products.length == 0)
-        document.getElementById("titles").innerHTML = `
-            <h3 style="background-color:aquamarine; color:black">No se encontraron productos</h3><br>
-        `;
-    else {
-        document.getElementById("titles").innerHTML = `
-            <th>Nombre</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Foto</th>
-        `;
-        const allProducts = products.map(product => showProduct(product)).join(" ");
-        document.getElementById("listProducts").innerHTML = allProducts;
-        document.getElementById("code").value = '';
-        document.getElementById("title").value = '';
-        document.getElementById("price").value = '';
-        document.getElementById("thumbnail").value = '';
-    }      
-};
-
-socket.on('products', (allProducts) => {
-    addProduct(allProducts);
-});
+/* const sendProduct = () => { */
+/*     const title = document.getElementById("title").value; */
+/*     const description = document.getElementById("description").value; */
+/*     const code = document.getElementById("code").value; */
+/*     const thumbnail = document.getElementById("thumbnail").value; */
+/*     const price = document.getElementById("price").value; */
+/*     const stock = document.getElementById("stock").value; */
+/*     const timestamp  = Date.now(); */
+/*     const product = { title, description, code, thumbnail, price, stock, timestamp }; */
+/*     socket.emit("newProduct", product); */
+/*     return false; */
+/* }; */
+/*  */
+/* const showProduct = (product) => { */
+/*     const { code, title, price, thumbnail } = product; */
+/*     return ` */
+/*         <tr> */
+/*             <td>${code}</td> */
+/*             <td>${title}</td> */
+/*             <td>${price}</td> */
+/*             <td><img src="${thumbnail}" height="50rem"></td> */
+/*         </tr> */
+/*     `; */
+/* }; */
+/*  */
+/* const addProduct = (products) => { */
+/*     if (products.length == 0) */
+/*         document.getElementById("titles").innerHTML = ` */
+/*             <h3 style="background-color:aquamarine; color:black">No se encontraron productos</h3><br> */
+/*         `; */
+/*     else { */
+/*         document.getElementById("titles").innerHTML = ` */
+/*             <th>Nombre</th> */
+/*             <th>Nombre</th> */
+/*             <th>Precio</th> */
+/*             <th>Foto</th> */
+/*         `; */
+/*         const allProducts = products.map(product => showProduct(product)).join(" "); */
+/*         document.getElementById("listProducts").innerHTML = allProducts; */
+/*         document.getElementById("code").value = ''; */
+/*         document.getElementById("title").value = ''; */
+/*         document.getElementById("price").value = ''; */
+/*         document.getElementById("thumbnail").value = ''; */
+/*     }       */
+/* }; */
+/*  */
+/* socket.on('products', (allProducts) => { */
+/*     addProduct(allProducts); */
+/* }); */

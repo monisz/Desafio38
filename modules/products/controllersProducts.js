@@ -1,22 +1,23 @@
 const { getListProducts, getProduct, addProductToList, replaceProduct, deleteProduct } = require(`./serviceProducts`);
 
 //Vista de todos los productos
-const getAllProducts = (req, res) => {
-        const allProducts = getListProducts();
-        const products = productsToShow(allProducts)
-        const user = req.session.user;
-        /* const idCart = req.session.cart; */
-        res.render('products', {products, user, admin, /* idCart */});
+const getAllProducts = async (req, res) => {
+    const allProducts = await getListProducts();
+    const products = productsToShow(allProducts);
+    const user = req.session.user;
+    const idCart = req.session.cart;
+    const admin = process.env.ADMIN;
+    res.render('products', {products, user, admin, idCart});
 };
 
 
 //Para obtener un producto según su id
-const getProductById = (req, res) => {
+const getProductById = async (req, res) => {
     const user = req.session.user;
     const id = parseInt(req.params.id);
     if (isNaN(id)) return res.status(400).send({error: "el parámetro no es un número"});
-    const productFinded = getProduct(id);
-    const products = {};
+    const productFinded = await getProduct(id);
+    let products = {};
     if (!productFinded) {
         res.status(404);
         logger.info("prod no encontrado");
@@ -32,9 +33,9 @@ const getProductById = (req, res) => {
 const addProduct = (req, res) => {
     const newProduct = req.body;
     const newId = addProductToList(newProduct);
+    getAllProducts();
         res.send('producto agregado');
     /* res.render('products', {products, user}); */
-    getAllProducts();
 }
 
 //Recibe y actualiza un producto por id
@@ -66,7 +67,7 @@ const productsToShow = (items) => {
                 thumbnail: element.thumbnail
         })
     });
-        return products;
-}
+    return products;
+};
 
 module.exports = { getAllProducts, getProductById, addProduct, updateProduct, deleteProductById };

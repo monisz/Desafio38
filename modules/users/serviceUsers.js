@@ -1,4 +1,5 @@
-const { Container, colCart } = require('../../src/containers/containerMongoDb');
+const { Container, colUser } = require('../../infrastructure/containerMongoDb');
+const sendMail = require('../../utils/mailer');
 
 const defineUser = (dataUser) => {
     return {
@@ -10,12 +11,21 @@ const defineUser = (dataUser) => {
     }
 };
 
-const createCart = async () => {
-    const newCart = {
-        timestamp : Date.now(),
-        products: []
-    };
-    return await colCart.save(newCart);
+//Para buscar un usuario
+const findUser = async (username) => {
+    let user = await colUser.getUserById(username);
+    return user;
 };
 
-module.exports = { defineUser, createCart};
+//Para agregar un nuevo usuario
+const saveUser = async (newUser) => {
+    await colUser.saveUser(newUser);
+
+};
+
+//Envío de los avisos de compra por mail y whatsapp
+const sendRegistrationNotices = (user) => {
+    sendMail(user);
+};
+
+module.exports = { defineUser, findUser, saveUser, sendRegistrationNotices };

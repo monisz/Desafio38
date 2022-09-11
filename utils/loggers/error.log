@@ -3,3 +3,38 @@
 {"level":"error","message":null}
 {"level":"error","message":null}
 {"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":"error al buscar por id CastError: Cast to Number failed for value \"{}\" (type Object) at path \"id\" for model \"cart\""}
+{"level":"error","message":"error al buscar por id CastError: Cast to Number failed for value \"{}\" (type Object) at path \"id\" for model \"cart\""}
+{"level":"error","message":"error al buscar por id CastError: Cast to Number failed for value \"{}\" (type Object) at path \"id\" for model \"cart\""}
+{"level":"error","message":"error al buscar por id CastError: Cast to Number failed for value \"{}\" (type Object) at path \"id\" for model \"cart\""}
+{"level":"error","message":"error al buscar por id CastError: Cast to Number failed for value \"{}\" (type Object) at path \"id\" for model \"cart\""}
+{"level":"error","message":"error al buscar por id CastError: Cast to Number failed for value \"{}\" (type Object) at path \"id\" for model \"cart\""}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":"error al buscar por id TypeError: Cannot read properties of undefined (reading 'username')"}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}
+{"level":"error","message":null}

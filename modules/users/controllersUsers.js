@@ -1,5 +1,6 @@
-const { defineUser, createCart } = require(`./serviceUsers`);
-const getProduct = require('../products/serviceProducts');
+const { defineUser, sendRegistrationNotices } = require(`./serviceUsers`);
+const { createCart } = require('../cart/serviceCart');
+const logger = require('../../utils/loggers/winston');
 
 const register = (req, res) => {
     res.render('register');
@@ -7,7 +8,7 @@ const register = (req, res) => {
 
 const registerUser = (req, res) => {
     const registerSuccess = 'Registrado exitosamente. Ir a Login para ingresar';
-    sendMail(req.body);
+    sendRegistrationNotices(req.body);
     res.render('register', {registerSuccess});
 };
 
@@ -24,11 +25,10 @@ const login = (req, res) => {
     }
 };
 
-const loginUser = (req, res) => {
+const loginUser = async (req, res) => {
     const user = defineUser(req.user);
-    console.log(user)
     req.session.user = user;
-    const idCart = createCart();
+    const idCart = await createCart();
     req.session.cart = idCart;
     logger.info(`carrito agregado id: ${idCart}`);
     res.render('home',  {user, idCart});

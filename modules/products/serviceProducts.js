@@ -1,4 +1,4 @@
-const { Container, colProduct } = require('../../src/containers/containerMongoDb');
+const { Container, colProduct } = require('../../infrastructure/containerMongoDb');
 
 const getListProducts = async () => {
     const allProducts = await colProduct.getAll();
@@ -30,35 +30,4 @@ const deleteProduct = async (id) => {
     return result;
 };
 
-module.exports = { getListProducts, getProduct, addProductToList, replaceProduct, deleteProduct}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = {
-    getListProducts
-}
+module.exports = { getListProducts, getProduct, addProductToList, replaceProduct, deleteProduct };
