@@ -13,7 +13,7 @@ const compression = require('compression');
 const logger = require('./utils/loggers/winston');
 
 const apiRoutes = require('./src/routes/index');
-const { Container, colProduct } = require('./infrastructure/containerMongoDb');
+const { Container, colProduct } = require('./dataBase/containerMongoDb');
 const colMessages = require('./src/containers/messagesContainer_firebase');
 
 const app = express();

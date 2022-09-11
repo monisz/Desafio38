@@ -1,4 +1,4 @@
-const { Container, colProduct } = require('../../infrastructure/containerMongoDb');
+const { Container, colProduct } = require('../../dataBase/containerMongoDb');
 
 const getListProducts = async () => {
     const allProducts = await colProduct.getAll();

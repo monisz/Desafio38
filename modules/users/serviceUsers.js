@@ -1,4 +1,4 @@
-const { Container, colUser } = require('../../infrastructure/containerMongoDb');
+const { Container, colUser } = require('../../dataBase/containerMongoDb');
 const sendMail = require('../../utils/mailer');
 
 const defineUser = (dataUser) => {
